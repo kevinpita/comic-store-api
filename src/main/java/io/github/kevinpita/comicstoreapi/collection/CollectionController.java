@@ -36,4 +36,9 @@ public class CollectionController {
             @RequestParam(required = false) String description) {
         return collectionService.updateCollection(id, publisher, description);
     }
+
+    @DeleteMapping("{id}")
+    public void deleteCollection(@PathVariable Long id) {
+        collectionService.deleteCollection(id);
+    }
 }
