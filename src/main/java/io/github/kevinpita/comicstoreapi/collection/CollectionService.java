@@ -24,7 +24,8 @@ public class CollectionService {
                 .orElseThrow(
                         () ->
                                 new ResponseStatusException(
-                                        HttpStatus.NOT_FOUND, "Collection Not Found"));
+                                        HttpStatus.NOT_FOUND,
+                                        String.format("Collection %d Not Found", id)));
     }
 
     public Collection createCollection(Collection collection) {
