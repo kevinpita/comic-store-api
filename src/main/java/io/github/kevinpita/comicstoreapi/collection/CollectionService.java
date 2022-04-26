@@ -32,5 +32,26 @@ public class CollectionService {
         return collectionRepository.save(collection);
     }
 
+    public Collection updateCollection(Long id, String publisher, String description) {
+        Collection collectionToUpdate =
+                collectionRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () ->
+                                        new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                String.format("Collection %d Not Found", id)));
+
+        if (publisher != null && !publisher.isBlank()) {
+            collectionToUpdate.setPublisher(publisher);
+        }
+
+        if (description != null && !description.isBlank()) {
+            collectionToUpdate.setPublisher(description);
+        }
+
+        return collectionToUpdate;
+    }
+
     }
 }
