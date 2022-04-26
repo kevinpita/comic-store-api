@@ -6,7 +6,7 @@ import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/collection")
+@RequestMapping("/api/v1/collections")
 public class CollectionController {
     private final CollectionService collectionService;
 
