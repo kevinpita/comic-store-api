@@ -20,12 +20,12 @@ public class CollectionController {
     }
 
     @GetMapping("/{id}")
-    public Collection getCollection(@Valid @PathVariable Long id) {
+    public Collection getCollection(@PathVariable Long id) {
         return collectionService.getCollection(id);
     }
 
     @PostMapping
-    public Collection createCollection(@Valid Collection collection) {
+    public Collection createCollection(@Valid @RequestBody Collection collection) {
         return collectionService.createCollection(collection);
     }
 }
