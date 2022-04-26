@@ -27,7 +27,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         String requestAuthToken = request.getHeader("Authorization");
         log.info(
                 String.format(
-                        "Request URI: %s. Request Auth Token: %s",
+                        "Request URI: %s - Request Auth Token: %s",
                         request.getRequestURI(), requestAuthToken));
 
         if (isApiCall && !Objects.equals(requestAuthToken, validAuthToken)) {
