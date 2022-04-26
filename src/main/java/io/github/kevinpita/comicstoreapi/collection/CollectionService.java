@@ -14,8 +14,8 @@ public class CollectionService {
         this.collectionRepository = collectionRepository;
     }
 
-    public Collection createCollection(Collection collection) {
-        return collectionRepository.save(collection);
+    public List<Collection> getCollections() {
+        return collectionRepository.findAll();
     }
 
     public Collection getCollection(Long id) {
@@ -27,11 +27,9 @@ public class CollectionService {
                                         HttpStatus.NOT_FOUND, "Collection Not Found"));
     }
 
-    public Collection updateCollection(Collection collection) {
+    public Collection createCollection(Collection collection) {
         return collectionRepository.save(collection);
     }
 
-    public List<Collection> getCollections() {
-        return collectionRepository.findAll();
     }
 }
