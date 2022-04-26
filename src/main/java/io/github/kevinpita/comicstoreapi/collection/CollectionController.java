@@ -19,7 +19,7 @@ public class CollectionController {
         return collectionService.getCollections();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Collection getCollection(@PathVariable Long id) {
         return collectionService.getCollection(id);
     }
