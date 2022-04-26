@@ -53,5 +53,13 @@ public class CollectionService {
         return collectionToUpdate;
     }
 
+    public void deleteCollection(Long id) {
+        boolean collectionExists = collectionRepository.existsById(id);
+        if (!collectionExists) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, String.format("Collection %d Not Found", id));
+        }
+
+        collectionRepository.deleteById(id);
     }
 }
