@@ -28,4 +28,12 @@ public class CollectionController {
     public Collection createCollection(@Valid @RequestBody Collection collection) {
         return collectionService.createCollection(collection);
     }
+
+    @PutMapping("{id}")
+    public Collection updateCollection(
+            @PathVariable Long id,
+            @RequestParam(required = false) String publisher,
+            @RequestParam(required = false) String description) {
+        return collectionService.updateCollection(id, publisher, description);
+    }
 }
