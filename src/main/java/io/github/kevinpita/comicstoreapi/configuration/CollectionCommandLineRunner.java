@@ -23,5 +23,11 @@ public class CollectionCommandLineRunner implements CommandLineRunner {
         collection.setDescription("The Marvel Universe");
         collection.setPublisher("Marvel Comics");
         collectionRepository.save(collection);
+
+        collection = new Collection();
+        collection.setName("DC 1");
+        collection.setDescription("The DC Universe");
+        collection.setPublisher("DC Comics");
+        collectionRepository.save(collection);
     }
 }
