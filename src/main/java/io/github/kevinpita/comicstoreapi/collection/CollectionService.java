@@ -47,7 +47,7 @@ public class CollectionService {
         }
 
         if (description != null && !description.isBlank()) {
-            collectionToUpdate.setPublisher(description);
+            collectionToUpdate.setDescription(description);
         }
 
         return collectionToUpdate;
