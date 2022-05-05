@@ -2,6 +2,7 @@
 package io.github.kevinpita.comicstoreapi.collection;
 
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -32,6 +33,7 @@ public class CollectionService {
         return collectionRepository.save(collection);
     }
 
+    @Transactional
     public Collection updateCollection(Long id, String publisher, String description) {
         Collection collectionToUpdate =
                 collectionRepository
