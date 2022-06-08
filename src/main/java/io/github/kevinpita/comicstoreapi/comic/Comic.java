@@ -1,6 +1,7 @@
 /* Kevin Pita 2022 */
 package io.github.kevinpita.comicstoreapi.comic;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.github.kevinpita.comicstoreapi.collection.Collection;
 import io.github.kevinpita.comicstoreapi.comiccopy.ComicCopy;
 import io.github.kevinpita.comicstoreapi.comiccreator.ComicCreator;
@@ -35,6 +36,7 @@ public class Comic {
     @Column(name = "issue_number")
     private int issueNumber;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "collection_id", foreignKey = @ForeignKey(name = "fk_comic_collection"))
     private Collection collection;
