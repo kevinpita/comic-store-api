@@ -1,6 +1,7 @@
 /* Kevin Pita 2022 */
 package io.github.kevinpita.comicstoreapi.comic;
 
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,5 +18,9 @@ public class ComicService {
 
     public Comic createComic(Comic comic) {
         return comicRepository.save(comic);
+    }
+
+    public List<Comic> getAllComics() {
+        return comicRepository.findAll();
     }
 }
