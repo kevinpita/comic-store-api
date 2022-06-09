@@ -1,16 +1,31 @@
 version: "3"
 services:
-    mariadb:
-        container_name: "comic-api-mariadb"
+    db:
+        container_name: "comic-db"
         image: mariadb:10.7
         restart: always
         environment:
             MARIADB_ROOT_PASSWORD: "root"
+            MARIADB_DATABASE: "comic_store_api_test"
         ports:
             - "3306:3306"
         volumes:
             - db_data:/var/lib/mysql
             - db_conf:/etc/mysql
+    api:
+        container_name: "comic-api"
+        image: kevinpita/comicstoreapi:0.0.2
+        restart: always
+        environment:
+            DB_HOSTNAME: "comic-db"
+            DB_PORT: "3306"
+            DB_DATABASE: "comic_store_api_test"
+            DB_USER: "root"
+            DB_PASS: "root"
+        ports:
+            - "8383:8080"
+        depends_on:
+            - db
 volumes:
     db_data:
     db_conf:

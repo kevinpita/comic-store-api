@@ -36,6 +36,7 @@ jobs:
 
       - name: Docker build
         run: |
+          docker build . -t kevinpita/comicstoreapi 
           docker build . -t kevinpita/comicstoreapi:${{ steps.bump.outputs.version }}
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -45,5 +46,5 @@ jobs:
 
       - name: Docker push
         run: |
+          docker push kevinpita/comicstoreapi
           docker push kevinpita/comicstoreapi:${{ steps.bump.outputs.version }}
-
