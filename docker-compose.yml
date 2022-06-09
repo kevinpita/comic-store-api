@@ -14,7 +14,7 @@ services:
             - db_conf:/etc/mysql
     api:
         container_name: "comic-api"
-        image: kevinpita/comicstoreapi:0.0.2
+        image: kevinpita/comicstoreapi:latest
         restart: always
         environment:
             DB_HOSTNAME: "comic-db"
