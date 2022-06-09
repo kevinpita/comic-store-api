@@ -20,24 +20,22 @@ jobs:
       contents: read
       packages: write
     outputs:
-      jar_version: ${{ steps.bump.outputs.version }}
+      jar_version: ${{ steps.bump.outputs.jar_version }}
 
     steps:
       - name: Checkout Latest Commit
         uses: actions/checkout@v2
 
-      - name: Bump Version
+      - name: Bump jar version
         id: bump
-        uses: nnichols/maven-version-bump-action@v3
-        with:
-          github-token: ${{ secrets.github_token }}
-          git-email: 69063372+kevinpita@users.noreply.github.com
-          git-username: Kevin Pita
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo ::set-output name=jar_version::${VERSION}
 
       - name: Docker build
         run: |
           docker build . -t kevinpita/comicstoreapi 
-          docker build . -t kevinpita/comicstoreapi:${{ steps.bump.outputs.version }}
+          docker build . -t kevinpita/comicstoreapi:${{ steps.bump.outputs.jar_version }}
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
@@ -47,4 +45,4 @@ jobs:
       - name: Docker push
         run: |
           docker push kevinpita/comicstoreapi
-          docker push kevinpita/comicstoreapi:${{ steps.bump.outputs.version }}
+          docker push kevinpita/comicstoreapi:${{ steps.bump.outputs.jar_version }}
