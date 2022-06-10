@@ -26,7 +26,10 @@ services:
             - "8383:8080"
         depends_on:
             - db
+        volumes:
+            - api_images:/root/data
 volumes:
     db_data:
     db_conf:
+    api_images:
 
