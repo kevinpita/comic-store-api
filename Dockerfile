@@ -8,5 +8,6 @@ RUN mvn -B package -e -X --file pom.xml -DskipTests
 FROM openjdk:11
 WORKDIR /root/
 COPY --from=BUILD_IMAGE /root/dev/myapp/target/comicstoreapi*.jar .
+COPY data data
 CMD java -jar comicstoreapi*.jar
 
