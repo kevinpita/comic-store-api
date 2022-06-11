@@ -24,13 +24,14 @@ public class SecurityFilter extends OncePerRequestFilter {
             HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         boolean isApiCall = request.getRequestURI().startsWith("/api/");
+        boolean isUploadCall = request.getRequestURI().startsWith("/images/upload/");
         String requestAuthToken = request.getHeader("Authorization");
         log.info(
                 String.format(
                         "Request URI: %s - Request Auth Token: %s",
                         request.getRequestURI(), requestAuthToken));
 
-        if (isApiCall && !Objects.equals(requestAuthToken, validAuthToken)) {
+        if ((isApiCall || isUploadCall) && !Objects.equals(requestAuthToken, validAuthToken)) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
             return;
         }
