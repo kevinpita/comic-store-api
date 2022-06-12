@@ -1,7 +1,11 @@
 /* Kevin Pita 2022 */
 package io.github.kevinpita.comicstoreapi.collection;
 
+import io.github.kevinpita.comicstoreapi.comic.Comic;
+import io.github.kevinpita.comicstoreapi.comic.ComicDto;
+import io.github.kevinpita.comicstoreapi.comic.ComicService;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -63,5 +67,18 @@ public class CollectionService {
         }
 
         collectionRepository.deleteById(id);
+    }
+
+    public static CollectionDto from(Collection collection) {
+        List<Comic> comics = collection.getComics();
+        List<ComicDto> comicsDto =
+                comics.stream().map(ComicService::from).collect(Collectors.toList());
+        return CollectionDto.builder()
+                .id(collection.getId())
+                .name(collection.getName())
+                .description(collection.getDescription())
+                .publisher(collection.getPublisher())
+                .comics(comicsDto)
+                .build();
     }
 }
