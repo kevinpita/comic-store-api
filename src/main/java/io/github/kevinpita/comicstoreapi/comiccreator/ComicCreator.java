@@ -1,6 +1,7 @@
 /* Kevin Pita 2022 */
 package io.github.kevinpita.comicstoreapi.comiccreator;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.github.kevinpita.comicstoreapi.comic.Comic;
 import io.github.kevinpita.comicstoreapi.creator.Creator;
 import javax.persistence.*;
@@ -26,10 +27,12 @@ public class ComicCreator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comic_id", foreignKey = @ForeignKey(name = "fk_comic_creator_comic_id"))
     private Comic comic;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "creator_id", foreignKey = @ForeignKey(name = "fk_comic_creator_creator_id"))
     private Creator creator;
