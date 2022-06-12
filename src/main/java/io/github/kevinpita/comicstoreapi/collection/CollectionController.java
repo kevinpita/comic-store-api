@@ -1,9 +1,11 @@
 /* Kevin Pita 2022 */
 package io.github.kevinpita.comicstoreapi.collection;
 
+import io.github.kevinpita.comicstoreapi.response.CustomResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,14 +18,28 @@ public class CollectionController {
     }
 
     @GetMapping
-    public List<CollectionDto> getCollections() {
+    public ResponseEntity<CustomResponse> getCollections() {
         List<Collection> collections = collectionService.getCollections();
-        return collections.stream().map(CollectionService::from).collect(Collectors.toList());
+        List<CollectionDto> data =
+                collections.stream().map(CollectionService::from).collect(Collectors.toList());
+        return CustomResponse.builder()
+                .error(false)
+                .message("Collections")
+                .data(data)
+                .build()
+                .withResponse(200);
     }
 
     @GetMapping("{id}")
-    public Collection getCollection(@PathVariable Long id) {
-        return collectionService.getCollection(id);
+    public ResponseEntity<CustomResponse> getCollection(@PathVariable Long id) {
+        Collection collection = collectionService.getCollection(id);
+        CollectionDto data = CollectionService.from(collection);
+        return CustomResponse.builder()
+                .error(false)
+                .message("Collection " + id)
+                .data(data)
+                .build()
+                .withResponse(200);
     }
 
     @PostMapping
