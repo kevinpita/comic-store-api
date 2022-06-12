@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -29,7 +29,6 @@ public class ImageService {
     }
 
     public ResponseEntity<CustomResponse> uploadImage(MultipartFile image, String type, Long id) {
-        String extension = StringUtils.getFilenameExtension(image.getOriginalFilename());
         Path path;
 
         path = getFolderByPath(type, id);
@@ -42,7 +41,7 @@ public class ImageService {
                     .withResponse(500);
         }
 
-        path = getFilePath(id, extension, path);
+        path = getFilePath(id, path);
 
         try {
             Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
@@ -61,8 +60,26 @@ public class ImageService {
                 .withResponse(200);
     }
 
-    private Path getFilePath(Long id, String extension, Path path) {
-        String filename = String.format("%s.%s", id, extension);
+    public ResponseEntity<byte[]> getImage(String type, Long id) throws IOException {
+        Path path = getFilePath(id, getFolderByPath(type, id));
+        if (!Files.exists(path)) {
+            path = getDefaultImage(type);
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(Files.readAllBytes(path));
+    }
+
+    private Path getDefaultImage(String type) {
+        Path path;
+        if (type.equals("collection")) {
+            path = Path.of("images/default/collection.png");
+        } else {
+            path = Path.of("images/default/comic.png");
+        }
+        return path;
+    }
+
+    private Path getFilePath(Long id, Path path) {
+        String filename = String.format("%s.%s", id, "png");
         path = path.resolve(filename);
         return path;
     }

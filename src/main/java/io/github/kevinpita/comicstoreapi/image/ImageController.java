@@ -2,6 +2,7 @@
 package io.github.kevinpita.comicstoreapi.image;
 
 import io.github.kevinpita.comicstoreapi.response.CustomResponse;
+import java.io.IOException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,5 +22,11 @@ public class ImageController {
             @PathVariable String type,
             @PathVariable Long id) {
         return imageService.uploadImage(image, type, id);
+    }
+
+    @GetMapping("/{type}/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable String type, @PathVariable Long id)
+            throws IOException {
+        return imageService.getImage(type, id);
     }
 }
