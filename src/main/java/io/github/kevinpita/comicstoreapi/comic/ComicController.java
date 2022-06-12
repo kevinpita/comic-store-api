@@ -2,6 +2,7 @@
 package io.github.kevinpita.comicstoreapi.comic;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +16,9 @@ public class ComicController {
     }
 
     @GetMapping
-    public List<Comic> getComics() {
-        return comicService.getAllComics();
+    public List<ComicDto> getComics() {
+        List<Comic> comics = comicService.getAllComics();
+        return comics.stream().map(ComicService::from).collect(Collectors.toList());
     }
 
     @PostMapping
