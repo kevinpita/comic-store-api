@@ -22,6 +22,7 @@ services:
             DB_DATABASE: "comic_store_api_test"
             DB_USER: "root"
             DB_PASS: "root"
+            VALID_AUTH_TOKEN: auth_token_env_compose
         ports:
             - "8383:8080"
         depends_on:
