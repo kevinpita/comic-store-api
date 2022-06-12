@@ -1,6 +1,7 @@
 /* Kevin Pita 2022 */
 package io.github.kevinpita.comicstoreapi.comiccreator;
 
+import io.github.kevinpita.comicstoreapi.creator.CreatorDto;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,5 +26,17 @@ public class ComicCreatorService {
 
     public void deleteById(Long id) {
         comicCreatorRepository.deleteById(id);
+    }
+
+    public static ComicCreatorDto from(ComicCreator comicCreator) {
+        return ComicCreatorDto.builder()
+                .id(comicCreator.getId())
+                .creator(
+                        CreatorDto.builder()
+                                .id(comicCreator.getCreator().getId())
+                                .fullName(comicCreator.getCreator().getFullName())
+                                .build())
+                .role(comicCreator.getRole())
+                .build();
     }
 }
