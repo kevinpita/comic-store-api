@@ -5,12 +5,10 @@ import io.github.kevinpita.comicstoreapi.comic.ComicDto;
 import java.io.Serializable;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Data
+@Builder
 public class CollectionDto implements Serializable {
     private final Long id;
     @NotBlank private final String name;
