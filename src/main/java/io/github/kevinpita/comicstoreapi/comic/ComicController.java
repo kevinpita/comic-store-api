@@ -1,9 +1,11 @@
 /* Kevin Pita 2022 */
 package io.github.kevinpita.comicstoreapi.comic;
 
+import io.github.kevinpita.comicstoreapi.response.CustomResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,9 +18,27 @@ public class ComicController {
     }
 
     @GetMapping
-    public List<ComicDto> getComics() {
+    public ResponseEntity<CustomResponse> getComics() {
         List<Comic> comics = comicService.getAllComics();
-        return comics.stream().map(ComicService::from).collect(Collectors.toList());
+        List<ComicDto> data = comics.stream().map(ComicService::from).collect(Collectors.toList());
+        return CustomResponse.builder()
+                .error(false)
+                .message("Comics")
+                .data(data)
+                .build()
+                .withResponse(200);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<CustomResponse> getComic(@PathVariable Long id) {
+        Comic comics = comicService.getComic(id);
+        ComicDto data = ComicService.from(comics);
+        return CustomResponse.builder()
+                .error(false)
+                .message("Comics")
+                .data(data)
+                .build()
+                .withResponse(200);
     }
 
     @PostMapping
