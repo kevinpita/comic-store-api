@@ -99,7 +99,7 @@ public class ImageService {
         Path path = null;
         switch (type) {
             case "collection":
-                path = Path.of("images/collections/");
+                path = Path.of("images/collection/");
                 Collection collection = collectionService.getCollection(id);
                 if (collection == null) {
                     throw new InvalidModelIdException("Collection not found");
