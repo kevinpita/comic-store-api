@@ -28,7 +28,7 @@ services:
         depends_on:
             - db
         volumes:
-            - api_images:/root/data
+            - api_images:/root/images
 volumes:
     db_data:
     db_conf:
