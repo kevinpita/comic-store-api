@@ -41,6 +41,7 @@ public class ComicDto implements Serializable {
         private final Long id;
         private final LocalDate purchaseDate;
         private final String state;
+        private final String cover;
         private final BigDecimal price;
     }
 }

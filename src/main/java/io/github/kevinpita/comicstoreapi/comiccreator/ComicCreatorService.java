@@ -34,7 +34,8 @@ public class ComicCreatorService {
                 .creator(
                         CreatorDto.builder()
                                 .id(comicCreator.getCreator().getId())
-                                .fullName(comicCreator.getCreator().getFullName())
+                                .name(comicCreator.getCreator().getName())
+                                .lastName(comicCreator.getCreator().getLastName())
                                 .build())
                 .role(comicCreator.getRole())
                 .build();

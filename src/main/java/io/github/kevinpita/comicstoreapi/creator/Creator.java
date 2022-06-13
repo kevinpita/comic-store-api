@@ -14,18 +14,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(
-        name = "creator",
-        uniqueConstraints = {
-            @UniqueConstraint(name = "uq_creator_full_name", columnNames = "full_name")
-        })
+@Table(name = "creator")
 public class Creator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "full_name")
-    private String fullName;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
     private List<ComicCreator> comicCreators;

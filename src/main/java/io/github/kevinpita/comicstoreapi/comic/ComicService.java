@@ -60,6 +60,7 @@ public class ComicService {
                 .purchaseDate(comicCopy.getPurchaseDate())
                 .state(comicCopy.getState())
                 .price(comicCopy.getPrice())
+                .cover(comicCopy.getCover())
                 .build();
     }
 }

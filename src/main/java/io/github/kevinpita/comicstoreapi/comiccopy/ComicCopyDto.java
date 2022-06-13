@@ -13,6 +13,7 @@ public class ComicCopyDto implements Serializable {
     private final Long id;
     private final LocalDate purchaseDate;
     private final String state;
+    private final String cover;
     private final BigDecimal price;
     private final ComicDto comic;
 

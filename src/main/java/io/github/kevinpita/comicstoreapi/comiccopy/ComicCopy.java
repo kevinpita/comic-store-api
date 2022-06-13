@@ -26,6 +26,8 @@ public class ComicCopy {
 
     private String state;
 
+    private String cover;
+
     private BigDecimal price;
 
     @JsonBackReference

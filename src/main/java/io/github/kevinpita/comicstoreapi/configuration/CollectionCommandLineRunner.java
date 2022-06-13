@@ -55,8 +55,10 @@ public class CollectionCommandLineRunner implements CommandLineRunner {
 
         Creator creator = new Creator();
         Creator creator2 = new Creator();
-        creator.setFullName("Stan Lee");
-        creator2.setFullName("Jack Kirby");
+        creator.setName("Lee");
+        creator.setLastName("Lee");
+        creator2.setName("Jack");
+        creator2.setLastName("Kirby");
         creatorRepository.save(creator);
         creatorRepository.save(creator2);
 
@@ -83,6 +85,7 @@ public class CollectionCommandLineRunner implements CommandLineRunner {
         comicCopy.setComic(comic);
         comicCopy.setPrice(BigDecimal.valueOf(850.0));
         comicCopy.setState("Nuevo");
+        comicCopy.setCover("Blanda");
         comicCopy.setPurchaseDate(LocalDate.now());
         comicCopyRepository.save(comicCopy);
     }
