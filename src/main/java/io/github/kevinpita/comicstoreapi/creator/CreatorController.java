@@ -5,10 +5,7 @@ import io.github.kevinpita.comicstoreapi.response.CustomResponse;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/creators")
@@ -39,8 +36,8 @@ public class CreatorController {
     }
 
     @PostMapping
-    public final ResponseEntity<CustomResponse> create(CreatorDto creatorDto) {
-        Creator creator = creatorService.create(creatorDto);
+    public final ResponseEntity<CustomResponse> create(@RequestBody CreatorDto creatorDto) {
+        creatorService.create(creatorDto);
         return CustomResponse.builder()
                 .error(false)
                 .message("Creator created")

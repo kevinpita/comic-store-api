@@ -55,9 +55,12 @@ public class CreatorService {
         int count =
                 repository.countByNameAndLastName(creatorDto.getName(), creatorDto.getLastName());
         if (count > 0) {
+            System.out.println(count);
             lastName += String.format(" (%d)", count + 1);
         }
 
-        return Creator.builder().name(creatorDto.getName()).lastName(lastName).build();
+        Creator creator = Creator.builder().name(creatorDto.getName()).lastName(lastName).build();
+        repository.save(creator);
+        return creator;
     }
 }

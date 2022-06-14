@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CreatorDto implements Serializable {
-    private final Long id;
+    private Long id;
     private final String name;
     private final String lastName;
     private int createdComics;
