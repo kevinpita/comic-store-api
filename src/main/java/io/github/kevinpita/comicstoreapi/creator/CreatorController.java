@@ -44,4 +44,18 @@ public class CreatorController {
                 .build()
                 .withResponse(201);
     }
+
+    @PutMapping("{id}")
+    public final ResponseEntity<CustomResponse> update(
+            @RequestBody CreatorDto creatorDto, @PathVariable Long id) {
+        creatorDto.setId(id);
+
+        creatorService.update(creatorDto);
+
+        return CustomResponse.builder()
+                .error(false)
+                .message("Creator updated")
+                .build()
+                .withResponse(201);
+    }
 }
