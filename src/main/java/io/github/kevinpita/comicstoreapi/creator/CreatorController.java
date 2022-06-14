@@ -2,14 +2,13 @@
 package io.github.kevinpita.comicstoreapi.creator;
 
 import io.github.kevinpita.comicstoreapi.response.CustomResponse;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/creators")
@@ -23,7 +22,7 @@ public class CreatorController {
     @GetMapping
     public final ResponseEntity<CustomResponse> getAll() {
         List<Creator> creators = creatorService.getCreators();
-        List<CreatorDto> creatorDTOS  = new ArrayList<>();
+        List<CreatorDto> creatorDTOS = new ArrayList<>();
         for (Creator creator : creators) {
             int countedComics = creatorService.countComics(creator);
             CreatorDto dto = CreatorService.from(creator);
@@ -37,6 +36,15 @@ public class CreatorController {
                 .data(creatorDTOS)
                 .build()
                 .withResponse(200);
+    }
 
+    @PostMapping
+    public final ResponseEntity<CustomResponse> create(CreatorDto creatorDto) {
+        Creator creator = creatorService.create(creatorDto);
+        return CustomResponse.builder()
+                .error(false)
+                .message("Creator created")
+                .build()
+                .withResponse(201);
     }
 }

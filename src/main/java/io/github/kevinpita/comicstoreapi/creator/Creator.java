@@ -4,15 +4,13 @@ package io.github.kevinpita.comicstoreapi.creator;
 import io.github.kevinpita.comicstoreapi.comiccreator.ComicCreator;
 import java.util.List;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "creator")
 public class Creator {
