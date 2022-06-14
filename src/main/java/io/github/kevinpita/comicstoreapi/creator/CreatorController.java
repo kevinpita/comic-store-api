@@ -58,4 +58,16 @@ public class CreatorController {
                 .build()
                 .withResponse(201);
     }
+
+    @DeleteMapping("{id}")
+    public final ResponseEntity<CustomResponse> update(
+            @PathVariable Long id) {
+        creatorService.delete(id);
+
+        return CustomResponse.builder()
+                .error(false)
+                .message("Creator deleted")
+                .build()
+                .withResponse(200);
+    }
 }

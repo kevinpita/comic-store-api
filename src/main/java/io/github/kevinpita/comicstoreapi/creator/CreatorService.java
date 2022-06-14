@@ -31,7 +31,9 @@ public class CreatorService {
         return repository.save(creator);
     }
 
-    public void delete(Creator creator) {
+    public void delete(Long creatorId) {
+        Creator creator = repository.findById(creatorId).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Creator not found"));
         repository.delete(creator);
     }
 

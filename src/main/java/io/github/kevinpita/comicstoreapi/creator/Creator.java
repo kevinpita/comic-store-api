@@ -24,6 +24,6 @@ public class Creator {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ComicCreator> comicCreators;
 }
