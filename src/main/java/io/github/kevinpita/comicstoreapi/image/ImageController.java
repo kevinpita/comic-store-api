@@ -29,4 +29,16 @@ public class ImageController {
             throws IOException {
         return imageService.getImage(type, id);
     }
+
+    @DeleteMapping("/{type}/{id}")
+    public ResponseEntity<CustomResponse> deleteImage(
+            @PathVariable String type, @PathVariable Long id) throws IOException {
+        boolean delete = imageService.deleteImage(type, id);
+        return CustomResponse.builder()
+                .error(!delete)
+                .message("Image deleted")
+                .data(delete)
+                .build()
+                .withResponse(delete ? 200 : 500);
+    }
 }

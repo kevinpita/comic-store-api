@@ -41,9 +41,9 @@ public class Comic {
     @JoinColumn(name = "collection_id", foreignKey = @ForeignKey(name = "fk_comic_collection"))
     private Collection collection;
 
-    @OneToMany(mappedBy = "comic", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "comic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ComicCreator> comicCreators;
 
-    @OneToMany(mappedBy = "comic", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "comic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ComicCopy> copies;
 }

@@ -28,6 +28,6 @@ public class Collection {
 
     @NotBlank private String publisher;
 
-    @OneToMany(mappedBy = "collection", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "collection", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comic> comics;
 }

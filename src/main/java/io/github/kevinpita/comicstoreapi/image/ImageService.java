@@ -117,4 +117,26 @@ public class ImageService {
         }
         return path;
     }
+
+    public boolean deleteImage(String type, Long id) {
+        String pathString;
+        if (type.equals("collection")) {
+            pathString = "images/collection/";
+
+        } else if (type.equals("comic")) {
+            pathString = "images/comic/";
+        } else {
+            throw new ModelNotFoundException("Type not found");
+        }
+        Path path = getFilePath(id, Path.of(pathString));
+        if (!Files.exists(path)) {
+            return true;
+        }
+        try {
+            Files.delete(path);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
 }

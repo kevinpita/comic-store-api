@@ -38,7 +38,7 @@ public class CollectionService {
     }
 
     @Transactional
-    public Collection updateCollection(Long id, String publisher, String description) {
+    public Collection updateCollection(Long id, CollectionDto dto) {
         Collection collectionToUpdate =
                 collectionRepository
                         .findById(id)
@@ -48,13 +48,9 @@ public class CollectionService {
                                                 HttpStatus.NOT_FOUND,
                                                 String.format("Collection %d Not Found", id)));
 
-        if (publisher != null && !publisher.isBlank()) {
-            collectionToUpdate.setPublisher(publisher);
-        }
-
-        if (description != null && !description.isBlank()) {
-            collectionToUpdate.setDescription(description);
-        }
+        collectionToUpdate.setName(dto.getName());
+        collectionToUpdate.setDescription(dto.getDescription());
+        collectionToUpdate.setPublisher(dto.getPublisher());
 
         return collectionToUpdate;
     }

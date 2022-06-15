@@ -43,7 +43,6 @@ public class CollectionController {
 
     @PostMapping
     public final ResponseEntity<CustomResponse> create(@RequestBody CollectionDto collectionDto) {
-        System.out.println(collectionDto);
         Collection collection = collectionService.create(collectionDto);
         CollectionDto data = CollectionService.fromNew(collection);
         return CustomResponse.builder()
@@ -55,11 +54,16 @@ public class CollectionController {
     }
 
     @PutMapping("{id}")
-    public Collection updateCollection(
-            @PathVariable Long id,
-            @RequestParam(required = false) String publisher,
-            @RequestParam(required = false) String description) {
-        return collectionService.updateCollection(id, publisher, description);
+    public ResponseEntity<CustomResponse> updateCollection(
+            @PathVariable Long id, @RequestBody CollectionDto collectionDto) {
+
+        collectionService.updateCollection(id, collectionDto);
+
+        return CustomResponse.builder()
+                .error(false)
+                .message("Collection " + id + " updated")
+                .build()
+                .withResponse(201);
     }
 
     @DeleteMapping("{id}")
