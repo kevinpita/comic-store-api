@@ -4,7 +4,6 @@ package io.github.kevinpita.comicstoreapi.collection;
 import io.github.kevinpita.comicstoreapi.response.CustomResponse;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,8 +42,16 @@ public class CollectionController {
     }
 
     @PostMapping
-    public Collection createCollection(@Valid @RequestBody Collection collection) {
-        return collectionService.createCollection(collection);
+    public final ResponseEntity<CustomResponse> create(@RequestBody CollectionDto collectionDto) {
+        System.out.println(collectionDto);
+        Collection collection = collectionService.create(collectionDto);
+        CollectionDto data = CollectionService.fromNew(collection);
+        return CustomResponse.builder()
+                .error(false)
+                .message("Creator created")
+                .data(data)
+                .build()
+                .withResponse(201);
     }
 
     @PutMapping("{id}")

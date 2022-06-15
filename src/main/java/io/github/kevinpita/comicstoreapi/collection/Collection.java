@@ -5,15 +5,13 @@ import io.github.kevinpita.comicstoreapi.comic.Comic;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(
         name = "collection",

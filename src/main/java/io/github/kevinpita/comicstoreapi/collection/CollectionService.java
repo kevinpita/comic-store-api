@@ -69,6 +69,15 @@ public class CollectionService {
         collectionRepository.deleteById(id);
     }
 
+    public static CollectionDto fromNew(Collection collection) {
+        return CollectionDto.builder()
+                .id(collection.getId())
+                .name(collection.getName())
+                .publisher(collection.getPublisher())
+                .description(collection.getDescription())
+                .build();
+    }
+
     public static CollectionDto from(Collection collection) {
         List<Comic> comics = collection.getComics();
         List<ComicDto> comicsDto =
@@ -80,5 +89,25 @@ public class CollectionService {
                 .publisher(collection.getPublisher())
                 .comics(comicsDto)
                 .build();
+    }
+
+    public Collection create(CollectionDto collectionDto) {
+        // check if collection DTO already exists by name
+        boolean collectionExists = collectionRepository.existsByName(collectionDto.getName());
+
+        if (collectionExists) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    String.format("Collection %s already exists", collectionDto.getName()));
+        }
+
+        Collection collection =
+                Collection.builder()
+                        .name(collectionDto.getName())
+                        .description(collectionDto.getDescription())
+                        .publisher(collectionDto.getPublisher())
+                        .build();
+
+        return collectionRepository.save(collection);
     }
 }
