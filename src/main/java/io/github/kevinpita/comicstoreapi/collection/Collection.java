@@ -25,6 +25,7 @@ public class Collection {
 
     @NotBlank private String name;
 
+    @Column(name = "description", length = 512)
     private String description;
 
     @NotBlank private String publisher;
