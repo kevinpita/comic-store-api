@@ -50,3 +50,6 @@ target/
 *.iml
 *.ipr
 
+
+images/collection
+images/comic
