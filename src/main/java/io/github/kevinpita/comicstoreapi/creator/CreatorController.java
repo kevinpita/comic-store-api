@@ -60,8 +60,7 @@ public class CreatorController {
     }
 
     @DeleteMapping("{id}")
-    public final ResponseEntity<CustomResponse> update(
-            @PathVariable Long id) {
+    public final ResponseEntity<CustomResponse> update(@PathVariable Long id) {
         creatorService.delete(id);
 
         return CustomResponse.builder()
