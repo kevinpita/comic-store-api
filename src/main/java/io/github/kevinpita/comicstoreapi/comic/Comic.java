@@ -29,6 +29,7 @@ public class Comic {
 
     private String title;
 
+    @Column(length = 512)
     private String description;
 
     @Column(name = "issue_number")

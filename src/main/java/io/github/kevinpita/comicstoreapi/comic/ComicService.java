@@ -125,11 +125,8 @@ public class ComicService {
                     comicRepository
                             .findById(comicDto.getId())
                             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-            //            comic.getComicCreators()
-            //                    .forEach(comicCreator ->
-            // comicCreatorRepository.delete(comicCreator));
-            //            comic.getCopies().forEach(comicCopy ->
-            // comicCopyRepository.delete(comicCopy));
+            comic.setDescription(comicDto.getDescription());
+            comic.setTitle(comicDto.getTitle());
             return comic;
         }
     }
