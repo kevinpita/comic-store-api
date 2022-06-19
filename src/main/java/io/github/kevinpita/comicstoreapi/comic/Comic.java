@@ -7,13 +7,11 @@ import io.github.kevinpita.comicstoreapi.comiccopy.ComicCopy;
 import io.github.kevinpita.comicstoreapi.comiccreator.ComicCreator;
 import java.util.List;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

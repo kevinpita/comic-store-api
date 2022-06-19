@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>io.github.kevinpita</groupId>
 	<artifactId>comicstoreapi</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<name>Comic Store API</name>
 	<description>Comic Store API</description>
 	<properties>

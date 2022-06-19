@@ -1,6 +1,11 @@
 /* Kevin Pita 2022 */
 package io.github.kevinpita.comicstoreapi.comic;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import io.github.kevinpita.comicstoreapi.comiccreator.ComicCreatorDto;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -39,7 +44,12 @@ public class ComicDto implements Serializable {
     @Builder
     public static class ComicCopyDto implements Serializable {
         private final Long id;
+
+        @JsonDeserialize(using = LocalDateDeserializer.class)
+        @JsonSerialize(using = LocalDateSerializer.class)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         private final LocalDate purchaseDate;
+
         private final String state;
         private final String cover;
         private final BigDecimal price;

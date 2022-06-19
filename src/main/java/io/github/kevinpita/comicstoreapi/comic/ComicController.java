@@ -4,7 +4,6 @@ package io.github.kevinpita.comicstoreapi.comic;
 import io.github.kevinpita.comicstoreapi.response.CustomResponse;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +41,14 @@ public class ComicController {
     }
 
     @PostMapping
-    public Comic createComic(@Valid @RequestBody Comic comic) {
-        return comicService.createComic(comic);
+    public final ResponseEntity<CustomResponse> create(@RequestBody ComicDto comicDto) {
+        Comic comic = comicService.createComic(comicDto);
+        ComicDto data = ComicService.from(comic);
+        return CustomResponse.builder()
+                .error(false)
+                .message("Creator created")
+                .data(data)
+                .build()
+                .withResponse(201);
     }
 }
