@@ -37,12 +37,13 @@ public class ComicService {
 
     @Transactional
     public Comic createComic(ComicDto comicDto) {
+
         Comic comic = fromDto(comicDto);
 
         fillCopyFromDto(comic, comicDto);
         fillCreatorFromDto(comic, comicDto);
 
-        comicRepository.save(comic);
+        comic = comicRepository.save(comic);
 
         return comic;
     }
@@ -82,6 +83,11 @@ public class ComicService {
                 collectionRepository
                         .findById(comicDto.getCollection().getId())
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        boolean issueExists =
+                comicRepository.issueNumberExists(comicDto.getIssueNumber(), collection.getId());
+        if (issueExists) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Issue number already exists");
+        }
 
         return Comic.builder()
                 .id(comicDto.getId())

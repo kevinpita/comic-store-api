@@ -30,8 +30,8 @@ public class ComicController {
 
     @GetMapping("{id}")
     public ResponseEntity<CustomResponse> getComic(@PathVariable Long id) {
-        Comic comics = comicService.getComic(id);
-        ComicDto data = ComicService.from(comics);
+        Comic comic = comicService.getComic(id);
+        ComicDto data = ComicService.from(comic);
         return CustomResponse.builder()
                 .error(false)
                 .message("Comics")
