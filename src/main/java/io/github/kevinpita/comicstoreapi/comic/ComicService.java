@@ -14,6 +14,7 @@ import io.github.kevinpita.comicstoreapi.creator.CreatorRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -43,6 +44,7 @@ public class ComicService {
         return comicRepository.findById(id).orElse(null);
     }
 
+    @Transactional
     public Comic createComic(ComicDto comicDto, boolean update) {
 
         Comic comic = fromDto(comicDto, update);
@@ -181,5 +183,9 @@ public class ComicService {
                 .price(comicCopy.getPrice())
                 .cover(comicCopy.getCover())
                 .build();
+    }
+
+    public void deleteComic(Long id) {
+        comicRepository.deleteById(id);
     }
 }

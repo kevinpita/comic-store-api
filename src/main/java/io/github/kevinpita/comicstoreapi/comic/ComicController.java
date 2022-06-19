@@ -63,4 +63,14 @@ public class ComicController {
                 .build()
                 .withResponse(201);
     }
+
+    @DeleteMapping("{id}")
+    public final ResponseEntity<CustomResponse> delete(@PathVariable Long id) {
+        comicService.deleteComic(id);
+        return CustomResponse.builder()
+                .error(false)
+                .message("Comic deleted")
+                .build()
+                .withResponse(200);
+    }
 }
