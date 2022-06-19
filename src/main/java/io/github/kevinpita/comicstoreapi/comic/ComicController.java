@@ -42,11 +42,23 @@ public class ComicController {
 
     @PostMapping
     public final ResponseEntity<CustomResponse> create(@RequestBody ComicDto comicDto) {
-        Comic comic = comicService.createComic(comicDto);
+        Comic comic = comicService.createComic(comicDto, false);
         ComicDto data = ComicService.from(comic);
         return CustomResponse.builder()
                 .error(false)
-                .message("Creator created")
+                .message("Comic created")
+                .data(data)
+                .build()
+                .withResponse(201);
+    }
+
+    @PutMapping
+    public final ResponseEntity<CustomResponse> update(@RequestBody ComicDto comicDto) {
+        Comic comic = comicService.createComic(comicDto, true);
+        ComicDto data = ComicService.from(comic);
+        return CustomResponse.builder()
+                .error(false)
+                .message("Comic updated")
                 .data(data)
                 .build()
                 .withResponse(201);
