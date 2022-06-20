@@ -6,10 +6,11 @@ services:
         restart: always
         environment:
             MARIADB_ROOT_PASSWORD: "root"
-            MARIADB_DATABASE: "comic_store_api_test"
+            MARIADB_DATABASE: "comic_store_api"
         ports:
             - "3306:3306"
         volumes:
+            - ./sql:/docker-entrypoint-initdb.d
             - db_data:/var/lib/mysql
             - db_conf:/etc/mysql
     api:
@@ -19,7 +20,7 @@ services:
         environment:
             DB_HOSTNAME: "comic-db"
             DB_PORT: "3306"
-            DB_DATABASE: "comic_store_api_test"
+            DB_DATABASE: "comic_store_api"
             DB_USER: "root"
             DB_PASS: "root"
             VALID_AUTH_TOKEN: auth_token_env_compose

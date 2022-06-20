@@ -53,3 +53,5 @@ target/
 
 images/collection
 images/comic
+
+.DS_Store
