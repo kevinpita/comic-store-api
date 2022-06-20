@@ -11,6 +11,9 @@ public interface CreatorRepository extends JpaRepository<Creator, Long> {
                     + " like CONCAT(?2, ' (%)'))")
     int countByNameAndLastName(String name, String lastName);
 
+    @Query("select count(c)>0 from Creator c where c.name = ?1 and c.lastName = ?2")
+    boolean existsByNameAndLastName(String name, String lastName);
+
     @Query(
             "select count(c) from Creator c where c.name = ?1 and (c.lastName = ?2 or c.lastName"
                     + " like CONCAT(?2, ' (%)')) and c.id <> ?3")

@@ -75,19 +75,11 @@ public class CreatorService {
 
     public void update(CreatorDto creatorDto) {
         String lastName = creatorDto.getLastName();
-        int count = 0;
-        String[] creatorLastNamePart = lastName.split(Pattern.quote("("));
-        if (creatorLastNamePart.length > 1) {
-            lastName = creatorLastNamePart[0];
-            count = Integer.parseInt(creatorLastNamePart[1].replace(")", ""));
-        }
 
-        if (count == 0) {
-            count =
-                    repository.countByNameLastNameAndId(
-                            creatorDto.getName(), creatorDto.getLastName(), creatorDto.getId());
-            count++;
-        }
+        int count =
+                repository.countByNameLastNameAndId(
+                        creatorDto.getName(), creatorDto.getLastName(), creatorDto.getId());
+        count++;
 
         if (count > 1) {
             lastName += String.format(" (%d)", count);
